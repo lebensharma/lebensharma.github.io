@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <title>We are going to be live.</title>
+    <style>
+        #basic {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #f9c922;
+            /* border: 2px solid black; */
+            /* border-radius: 50%; */
+        }
+
+        #clockContainer {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 35vw;
+            height: 35vw;
+            margin: -17.5vw 0 0 -17.5vw;
+            /* border: 1px solid red; */
+            border: 3px solid #f9c922;
+            /* border-top-color: #3498db; */
+            border-radius: 50%;
+            background: white;
+        }
+
+        #cir {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 2.5vw;
+            height: 2.5vw;
+            margin: -1.25vw 0 0 -1.25vw;
+            background: #3498db;
+            border-radius: 100%;
+
+        }
+
+        #hour,
+        #minute,
+        #second {
+            position: absolute;
+
+
+        }
+
+        #hour,
+        #minute {
+            background: #222;
+        }
+
+        #hour {
+            width: 4%;
+            height: 13vw;
+            top: 5.5vw;
+            left: 48.1%;
+            border-radius: 30px;
+            transform-origin: 50% 92%;
+        }
+
+        #minute {
+            width: 0.7vw;
+            height: 20vw;
+            top: 1.5vw;
+            left: 49%;
+            border-radius: 30px;
+            transform-origin: 50% 80%;
+        }
+
+        #second {
+            width: 0.4vw;
+            height: 19vw;
+            background: #e74c3c;
+            top: 2vw;
+            left: 49.5%;
+            border-radius: 30px;
+            transform-origin: 50% 81.5%;
+        }
+
+        #left,
+        #right {
+            top: 50%;
+            width: 20vw;
+            height: 12vw;
+            background: white;
+            border: 2px solid white;
+            border-radius: 25px;
+            align-content: center;
+        }
+
+        #left {
+            position: absolute;
+            left: 12%;
+            margin: -6vw 0 0 -7vw;
+
+
+        }
+
+        #right {
+            position: absolute;
+            right: 4.5%;
+            margin: -6vw 0 0 0;
+        }
+
+        .text {
+            position: relative;
+            align-items: center;
+            text-align: center;
+            /* top: 10%; */
+            font-family: 'Fredoka One', cursive;
+            font-size: 2vw;
+            padding: 10%;
+        }
+
+        .flex-container {
+            position: relative;
+            left: -1%;
+            width: 101%;
+            height: 40%;
+            /* border: 1px solid black; */
+            padding: auto;
+            top: -10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flex-container>div {
+            background-color: #f1f1f1;
+            margin: 0.5vw;
+            padding-left: 1vw;
+            padding-right: 1vw;
+            background: #f9c922;
+            font-family: 'Fredoka One', cursive;
+            border-radius: 1vw;
+            font-size: 2.5vw;
+        }
+
+        @media only screen and (max-width: 450px) {
+            #basic {
+                background-color: #f9c922;
+            }
+
+            #left {
+                top: 15%;
+                left: 50%;
+                width: 50vw;
+                height: 30vw;
+                margin-left: -25vw;
+            }
+
+            #right {
+                top: 75%;
+                left: 50%;
+                width: 55vw;
+                height: 30vw;
+                margin-left: -27.5vw;
+            }
+
+            .flex-container>div {
+                font-size: 6.5vw;
+            }
+
+            .text {
+                font-size: 6vw;
+            }
+        }
+
+
+
+        /* Loder Animations and Styling */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            /* border: 1px solid black; */
+        }
+
+        #loader {
+            display: block;
+            position: relative;
+            left: 50%;
+            top: 50%;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            /* margin: black; */
+            /* border: 1px solid red; */
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+            border-radius: 50%;
+            z-index: inherit;
+
+            -webkit-animation: spin 2s linear infinite;
+            /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 2s linear infinite;
+            /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        #loader::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+
+            border: 3px solid transparent;
+            border-top-color: #e74c3c;
+            border-radius: 50%;
+
+            -webkit-animation: spin 3s linear infinite;
+            /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 3s linear infinite;
+            /* Chrome, Firefox 16+, IE 10+, Opera */
+
+
+        }
+
+        #loader::after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+
+            border: 3px solid transparent;
+            border-top-color: #f9c922;
+            border-radius: 50%;
+
+            -webkit-animation: spin 1.5s linear infinite;
+            /* Chrome, Opera 15+, Safari 5+ */
+            animation: spin 1.5s linear infinite;
+            /* Chrome, Firefox 16+, IE 10+, Opera */
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                /* Chrome, Opera 15+, Safari 3.1+*/
+                -ms-transform: rotate(0deg);
+                /* IE 9 */
+                transform: rotate(0deg);
+                /* Firefox 16+, IE 10+, Opera */
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                /* Chrome, Opera 15+, Safari 3.1+*/
+                -ms-transform: rotate(360deg);
+                /* IE 9 */
+                transform: rotate(360deg);
+                /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                /* Chrome, Opera 15+, Safari 3.1+*/
+                -ms-transform: rotate(0deg);
+                /* IE 9 */
+                transform: rotate(0deg);
+                /* Firefox 16+, IE 10+, Opera */
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                /* Chrome, Opera 15+, Safari 3.1+*/
+                -ms-transform: rotate(360deg);
+                /* IE 9 */
+                transform: rotate(360deg);
+                /* Firefox 16+, IE 10+, Opera */
+            }
+        }
+
+        #loader-wrapper .loader-section {
+            position: fixed;
+            top: 0;
+            width: 51%;
+            height: 100%;
+            background: #222;
+            z-index: 1000;
+
+        }
+
+        #loader-wrapper .section-left {
+            left: 0;
+        }
+
+        #loader-wrapper .section-right {
+            right: 0;
+        }
+
+        /* Loaded styles */
+        .loaded #loader-wrapper .loader-section.section-left {
+            -webkit-transform: translateX(-100%);
+            /* Chrome, Opera 15+, Safari 3.1+*/
+            -ms-transform: translateX(-100%);
+            /* IE 9 */
+            transform: translateX(-100%);
+            /* Firefox 16+, IE 10+, Opera */
+
+            -webkit-transition: all 0.5s 0.5s ease-in-out;
+            /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+            transition: all 0.5s 0.5s ease-in-out;
+            /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+        }
+
+        .loaded #loader-wrapper .loader-section.section-right {
+            -webkit-transform: translateX(100%);
+            /* Chrome, Opera 15+, Safari 3.1+*/
+            -ms-transform: translateX(100%);
+            /* IE 9 */
+            transform: translateX(100%);
+            /* Firefox 16+, IE 10+, Opera */
+
+            -webkit-transition: all 0.5s 0.5s ease-in-out;
+            /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+            transition: all 0.5s 0.5s ease-in-out;
+            /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+        }
+
+        .loaded #loader-wrapper {
+            visibility: hidden;
+
+            -webkit-transform: translateY(-100%);
+            /* Chrome, Opera 15+, Safari 3.1+*/
+            -ms-transform: translateY(-100%);
+            /* IE 9 */
+            transform: translateY(-100%);
+            /* Firefox 16+, IE 10+, Opera */
+
+            -webkit-transition: all 0.3s 1s ease-in-out;
+            /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+            transition: all 0.3s 1s ease-in-out;
+            /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+
+        }
+
+        .loaded #loader {
+            opacity: 0;
+
+            -webkit-transition: all 0.3s 0.4s ease-out;
+            /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+            transition: all 0.3s 0.4s ease-in-out;
+            /* Chrome 26, Firefox 16+, iOS 7+, IE 10+, Opera, Safari 6.1+  */
+
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('body').addClass('loaded');
+            }, 3000);
+        });
+
+
+        setInterval(() => {
+            var one_day = 1000 * 60 * 60 * 24;
+            var date_target = new Date(2021, 3, 1);
+            var date_today = new Date();
+            resultd = Math.round((date_target.getTime() - date_today.getTime()) / (one_day));
+            h = resultd * 24 + (23 - date_today.getHours())
+            m = (59 - date_today.getMinutes())
+            s = (60 - date_today.getSeconds())
+            document.getElementById("d").innerHTML = resultd + "d";
+            document.title = "Live after " + h + "h " + m + "m " + s + "s"
+        }, 1000);
+
+        // if resultd > 30
+
+
+
+        setInterval(() => {
+            d = new Date();
+            h = 23 - (new Date().getHours());
+            m = 59 - (new Date().getMinutes());
+            s = 60 - (new Date().getSeconds());
+
+            hrotation = 30 * h + m / 2;
+            mrotation = 6 * m;
+            srotation = 6 * s;
+
+            hour.style.transform = `rotate(${hrotation}deg)`;
+            minute.style.transform = `rotate(${mrotation}deg)`;
+            second.style.transform = `rotate(${srotation}deg)`;
+
+        }, 1000);
+    </script>
+</head>
+
+<body>
+    <div id="loader-wrapper">
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+        <div id="loader"></div>
+    </div>
+
+    <div id="basic">
+        <div id="left">
+            <div class="text">
+                DAYS TO GO
+            </div>
+            <div class="flex-container">
+                <div id="y">0y</div>
+                <div id="m">0m</div>
+                <div id="d">d</div>
+            </div>
+        </div>
+        <div id="clockContainer">
+
+            <div id="cir"></div>
+            <div id="second"></div>
+            <div id="hour"></div>
+            <div id="minute"></div>
+        </div>
+
+        <div id="right">
+            <div class="text">
+                LAUNCH DATE
+            </div>
+            <div class="flex-container">
+                <div>01</div>
+                <div>Apr</div>
+                <div>21</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+</body>
+
+</html>
