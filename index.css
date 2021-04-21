@@ -136,6 +136,35 @@
     border-radius: 1vw;
     font-size: 2.5vw;
 }
+#top{
+    background: white;
+    position: absolute;
+    width: 50vw;
+    top: 1.5vw;
+    padding: 0.5vw;
+    align-self: center;
+    left: 50vw;
+    transform: translateX(-50%);
+    border-radius: 1vw;
+}
+.text_head{
+    font-family: 'Fredoka One', cursive; 
+    text-align: center;
+}
+#bottom{
+    background: white;
+    position: absolute;
+    width: 50vw;
+    bottom: 1vw;
+    padding: 0.5vw;
+    align-self: center;
+    left: 50vw;
+    transform: translateX(-50%);
+    border-radius: 1vw;
+}
+#lock{
+    height: 1vw;
+}
 
 @media only screen and (max-width: 450px) {
     #basic {
@@ -164,6 +193,28 @@
 
     .text {
         font-size: 6vw;
+    }
+    #top{
+        background: white;
+        position: absolute;
+        width: 100vw;
+        top: 0;
+        padding: 0.5vw;
+        align-self: center;
+        left: 50vw;
+        transform: translateX(-50%);
+        border-radius: 1vw;
+    }
+    #bottom{
+        background: white;
+        position: absolute;
+        width: 100vw;
+        bottom: 0;
+        padding: 0.5vw;
+        align-self: center;
+        left: 50vw;
+        transform: translateX(-50%);
+        border-radius: 1vw;
     }
 }
 

@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 setInterval(() => {
     var one_day = 1000 * 60 * 60 * 24;
-    var date_target = new Date(2021, 3, 1);
+    var date_target = new Date(2021, 3, 28);
     var date_today = new Date();
     resultd = Math.round((date_target.getTime() - date_today.getTime()) / (one_day));
     h = resultd * 24 + (23 - date_today.getHours())
