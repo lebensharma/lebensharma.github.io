@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="auto">
 
 <head>
     <meta charset="utf-8" />
@@ -37,6 +37,7 @@
 
     <style>
         :root {
+            /* Light */
             --ink: #101418;
             --sub: #4b5563;
             --bg: #ffffff;
@@ -45,6 +46,46 @@
             --brand: #0ea5e9;
             --border: #e5e7eb;
             --success: #22c55e;
+            --shadow: 0 10px 30px rgba(2, 6, 23, .06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ink: #e5e7eb;
+                --sub: #9aa3af;
+                --bg: #0b0f14;
+                --card: #0f141a;
+                --muted: #0d1218;
+                --brand: #38bdf8;
+                --border: #1f2a37;
+                --success: #22c55e;
+                --shadow: 0 10px 30px rgba(0, 0, 0, .4);
+            }
+        }
+
+        /* Manual override via [data-theme="light"|"dark"] */
+        html[data-theme="light"] {
+            --ink: #101418;
+            --sub: #4b5563;
+            --bg: #ffffff;
+            --card: #ffffff;
+            --muted: #f3f4f6;
+            --brand: #0ea5e9;
+            --border: #e5e7eb;
+            --success: #22c55e;
+            --shadow: 0 10px 30px rgba(2, 6, 23, .06);
+        }
+
+        html[data-theme="dark"] {
+            --ink: #e5e7eb;
+            --sub: #9aa3af;
+            --bg: #0b0f14;
+            --card: #0f141a;
+            --muted: #0d1218;
+            --brand: #38bdf8;
+            --border: #1f2a37;
+            --success: #22c55e;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .4);
         }
 
         * {
@@ -67,13 +108,29 @@
         }
 
         header {
-            margin-bottom: 24px
+            margin-bottom: 24px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px
+        }
+
+        .titlewrap {
+            display: flex;
+            gap: 14px;
+            align-items: center
+        }
+
+        #logo {
+            width: 48px;
+            height: 48px;
+            display: block
         }
 
         h1 {
             font-size: 2rem;
             line-height: 1.2;
-            margin: 0 0 8px
+            margin: 0 0 6px
         }
 
         .meta {
@@ -85,7 +142,8 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 28px
+            padding: 28px;
+            box-shadow: var(--shadow)
         }
 
         h2 {
@@ -128,7 +186,7 @@
             padding: 16px;
             border: 1px solid var(--border);
             border-radius: 12px;
-            background: #fcfdff
+            background: color-mix(in oklab, var(--card) 92%, var(--brand) 8%)
         }
 
         .toc ol {
@@ -140,10 +198,10 @@
             display: inline-block;
             padding: .15rem .5rem;
             border-radius: .5rem;
-            background: #ecfdf5;
-            color: #065f46;
+            background: color-mix(in oklab, var(--success) 15%, var(--bg));
+            color: var(--ink);
             font-size: .8rem;
-            border: 1px solid #d1fae5
+            border: 1px solid var(--border)
         }
 
         footer {
@@ -156,6 +214,30 @@
             border: 0;
             border-top: 1px solid var(--border);
             margin: 28px 0
+        }
+
+        .toggle {
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--ink);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: .9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .toggle:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px
+        }
+
+        .toggle .icon {
+            font-size: 1.05rem;
+            line-height: 1
         }
 
         @media print {
@@ -171,7 +253,12 @@
             .card,
             .toc,
             .notice {
-                border-color: #ddd
+                border-color: #ddd;
+                box-shadow: none
+            }
+
+            .toggle {
+                display: none
             }
         }
     </style>
@@ -180,16 +267,26 @@
 <body>
     <div class="container">
         <header>
-            <h1>Pinga – Privacy Policy</h1>
-            <div class="meta">
-                <span><strong>Effective Date:</strong> 30 September 2025</span><br />
-                <span><strong>Developer:</strong> Aashutosh Sharma</span><br />
-                <span><strong>Contact:</strong> <a
-                        href="mailto:co.recommit.aashutosh@gmail.com">co.recommit.aashutosh@gmail.com</a></span>
+            <div class="titlewrap">
+                <!-- LOGO SLOT: set your SVG or image path here -->
+                <!-- Example: <img id="logo" src="/assets/pinga-logo.svg" alt="Pinga logo" width="48" height="48" /> -->
+                <img id="logo" src="./pinga-pp.svg" alt="Pinga logo" height="48" />
+                <div>
+                    <h1>Pinga – Privacy Policy</h1>
+                    <div class="meta">
+                        <span><strong>Effective Date:</strong> 30 September 2025</span><br />
+                        <span><strong>Developer:</strong> Aashutosh Sharma</span><br />
+                        <span><strong>Contact:</strong> <a
+                                href="mailto:co.recommit.aashutosh@gmail.com">co.recommit.aashutosh@gmail.com</a></span>
+                    </div>
+                </div>
             </div>
+            <button id="themeToggle" class="toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+                <span class="icon" aria-hidden="true">🌙</span><span id="toggleText">Dark</span>
+            </button>
         </header>
 
-        <div class="toc">
+        <div class="toc" role="navigation" aria-label="Table of contents">
             <strong>Contents</strong>
             <ol>
                 <li><a href="#introduction">Introduction</a></li>
@@ -214,7 +311,8 @@
                 <p>Your privacy and safety are top priorities. Pinga has <strong>no backend server</strong>, uses
                     <strong>no analytics</strong>, shows <strong>no ads</strong>, and does <strong>not share</strong>
                     your personal information with third parties. All data stays on your device and you remain in
-                    control at all times.</p>
+                    control at all times.
+                </p>
             </section>
 
             <section id="information-collection" aria-labelledby="info-heading">
@@ -328,8 +426,54 @@
     </div>
 
     <script>
-        // Set current year in footer on load (non-essential)
+        // Footer year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme logic: 'auto' (system), 'light', 'dark'
+        const KEY = 'pinga-theme';
+        const root = document.documentElement;
+        const btn = document.getElementById('themeToggle');
+        const txt = document.getElementById('toggleText');
+        const iconSpan = btn.querySelector('.icon');
+
+        function applyTheme(pref) {
+            // pref: 'light' | 'dark' | 'auto'
+            root.setAttribute('data-theme', pref);
+            // Button UI
+            const isDark = (pref === 'dark') || (pref === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+            btn.setAttribute('aria-pressed', String(isDark));
+            iconSpan.textContent = isDark ? '☀️' : '🌙';
+            txt.textContent = isDark ? 'Light' : 'Dark';
+        }
+
+        function loadTheme() {
+            const saved = localStorage.getItem(KEY) || 'auto';
+            applyTheme(saved);
+            return saved;
+        }
+
+        function nextTheme(curr) {
+            // cycle: auto -> dark -> light -> auto
+            if (curr === 'auto') return 'dark';
+            if (curr === 'dark') return 'light';
+            return 'auto';
+        }
+
+        let current = loadTheme();
+
+        btn.addEventListener('click', () => {
+            current = nextTheme(current);
+            localStorage.setItem(KEY, current);
+            applyTheme(current);
+        });
+
+        // Listen to system changes when in 'auto'
+        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if ((localStorage.getItem(KEY) || 'auto') === 'auto') applyTheme('auto');
+        });
+
+        // Optional: set your logo path here via JS if you prefer
+        // document.getElementById('logo').src = '/assets/pinga-logo.svg';
     </script>
 </body>
 
